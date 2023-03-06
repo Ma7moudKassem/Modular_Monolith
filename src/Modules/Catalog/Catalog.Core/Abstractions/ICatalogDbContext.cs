@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Catalog.Core.Abstractions
+﻿namespace Catalog.Core.Abstractions
 {
     public interface ICatalogDbContext
     {

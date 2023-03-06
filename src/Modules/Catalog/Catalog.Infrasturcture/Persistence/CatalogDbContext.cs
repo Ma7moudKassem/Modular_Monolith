@@ -1,13 +1,9 @@
-﻿using Catalog.Core;
-using Catalog.Core.Abstractions;
-using Microsoft.EntityFrameworkCore;
-using Shared.Infrastructure;
-
-namespace Catalog.Infrasturcture;
+﻿namespace Catalog.Infrasturcture;
 
 public class CatalogDbContext : BaseDbContext, ICatalogDbContext
 {
-    public CatalogDbContext(DbContextOptions options) : base(options) { }
+    protected override string Schema => "Catalog";
+    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options) { }
 
     public DbSet<Brand> Brands { get; set; }
 

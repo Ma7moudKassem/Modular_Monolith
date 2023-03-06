@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Shared.Infrastructure;
+﻿namespace Shared.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {
@@ -19,15 +15,15 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDatabaseContexts<T>(this IServiceCollection services, IConfiguration configuration) where T : DbContext
     {
         string? connectionString = configuration.GetConnectionString("AppConnectionString");
-        services.AddDbContext<T>(e => e.UseSqlServer(connectionString, e => e.MigrationsAssembly(typeof(T).FullName)));
+        
+        services.AddDbContext<T>(e => e.UseSqlServer(connectionString, e => e.MigrationsAssembly(typeof(T).Assembly.FullName)));
 
         using (IServiceScope scope = services.BuildServiceProvider().CreateScope())
         {
             T dbContext = scope.ServiceProvider.GetRequiredService<T>();
-
             dbContext.Database.Migrate();
         }
-
+       
         return services;
     }
 }

@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Shared.Infrastructure;
+﻿namespace Shared.Infrastructure;
 
 public abstract class BaseDbContext : DbContext
 {
-    public string Schema { get; }
+    protected abstract string Schema { get; }
     protected BaseDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

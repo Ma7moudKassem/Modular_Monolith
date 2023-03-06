@@ -1,10 +1,12 @@
 using Catalog;
+using Person;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSharedInfrastructure(builder.Configuration);
 
 builder.Services.AddCatalogModule(builder.Configuration);
+builder.Services.AddPersonModule(builder.Configuration);
 
 builder.Services.AddControllers();
 
